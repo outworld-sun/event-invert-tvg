@@ -17,11 +17,7 @@ source .venv/bin/activate
 
 安装脚本默认 PyTorch 2.6.0 + CUDA 12.4、DeepSpeed 0.18.9。CPU offload 使用 DeepSpeedCPUAdam，服务器需要可用的 C++ 编译器和 Ninja；首次启动会编译扩展。默认注意力实现是 `sdpa`，无需编译 FlashAttention。服务器已有可用环境时也可以直接 `pip install -e '.[dev]'`。如需 FlashAttention，安装时设置 `INSTALL_FLASH_ATTENTION=1`，并在本地配置中设置 `training.attn_implementation` 为 `flash_attention_2`。
 
-<<<<<<< HEAD
-## 2. 八卡脚本
-=======
 ## 2. 八卡训练脚本
->>>>>>> d87746dd879fe061cd6b52d8ad222ba7bfce9f62
 
 主入口是 [`scripts/train.sh`](scripts/train.sh)。参考官方的“脚本变量 + torchrun + 显式训练参数”结构，现在直接修改脚本顶部即可，无需先编辑 JSON：
 
