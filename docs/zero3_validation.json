@@ -1,0 +1,516 @@
+{
+  "date": "2026-10-13",
+  "scope": "Engineering integration only: tiny random Qwen, controlled rewards/pairs, mocked video loader. No benchmark or IoU claim.",
+  "hardware": [
+    "NVIDIA RTX A6000",
+    "NVIDIA RTX A6000"
+  ],
+  "versions": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.51.3",
+    "accelerate": "1.7.0",
+    "peft": "0.15.2",
+    "deepspeed": "0.18.9"
+  },
+  "cpu_tests_passed": 29,
+  "resume_weights_exact_match": true,
+  "actor_weights_updated": true,
+  "gpu_runs": {
+    "resumed": {
+      "status": {
+        "status": "trained",
+        "backend": "deepspeed_zero3",
+        "global_step": 2,
+        "frozen_C0_unchanged": true,
+        "rank_parameter_max_error": 0.0,
+        "ranks": [
+          {
+            "rank": 0,
+            "elapsed_seconds": 4.683397348,
+            "peak_allocated_gib": 0.017255783081054688,
+            "judge": {
+              "judge_calls": 0,
+              "cache_hits": 6,
+              "judge_seconds": 0.0,
+              "visual_tokens": 0,
+              "prompt_tokens": 0,
+              "generated_tokens": 0,
+              "decode_failures": 0
+            }
+          },
+          {
+            "rank": 1,
+            "elapsed_seconds": 4.679752768000014,
+            "peak_allocated_gib": 0.017255783081054688,
+            "judge": {
+              "judge_calls": 0,
+              "cache_hits": 2,
+              "judge_seconds": 0.0,
+              "visual_tokens": 0,
+              "prompt_tokens": 0,
+              "generated_tokens": 0,
+              "decode_failures": 0
+            }
+          }
+        ]
+      },
+      "backend": {
+        "backend": "deepspeed_zero3",
+        "world_size": 2,
+        "stage": 3,
+        "engine": "DeepSpeedEngine",
+        "optimizer": "DeepSpeedCPUAdam",
+        "gradient_accumulation_steps": 2,
+        "partitioned_parameters": 37,
+        "resolved_deepspeed": {
+          "fp16": {
+            "enabled": false,
+            "loss_scale": 0,
+            "loss_scale_window": 1000,
+            "initial_scale_power": 16,
+            "hysteresis": 2,
+            "min_loss_scale": 1
+          },
+          "bf16": {
+            "enabled": true
+          },
+          "optimizer": {
+            "type": "AdamW",
+            "params": {
+              "lr": 0.01,
+              "betas": [
+                0.9,
+                0.999
+              ],
+              "eps": 1e-08,
+              "weight_decay": 0.0
+            }
+          },
+          "zero_optimization": {
+            "stage": 3,
+            "offload_optimizer": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "offload_param": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "overlap_comm": true,
+            "contiguous_gradients": true,
+            "sub_group_size": 1000000000,
+            "reduce_bucket_size": 1024,
+            "stage3_prefetch_bucket_size": 921,
+            "stage3_param_persistence_threshold": 320,
+            "stage3_max_live_parameters": 1000000000,
+            "stage3_max_reuse_distance": 1000000000,
+            "stage3_gather_16bit_weights_on_model_save": true
+          },
+          "gradient_accumulation_steps": 2,
+          "gradient_clipping": 1.0,
+          "train_batch_size": 4,
+          "train_micro_batch_size_per_gpu": 1,
+          "steps_per_print": Infinity,
+          "wall_clock_breakdown": false
+        }
+      }
+    },
+    "uninterrupted": {
+      "status": {
+        "status": "trained",
+        "backend": "deepspeed_zero3",
+        "global_step": 2,
+        "frozen_C0_unchanged": true,
+        "rank_parameter_max_error": 0.0,
+        "ranks": [
+          {
+            "rank": 0,
+            "elapsed_seconds": 4.862457535000004,
+            "peak_allocated_gib": 0.017255783081054688,
+            "judge": {
+              "judge_calls": 2,
+              "cache_hits": 10,
+              "judge_seconds": 0.02466291700000056,
+              "visual_tokens": 16,
+              "prompt_tokens": 26,
+              "generated_tokens": 6,
+              "decode_failures": 0
+            }
+          },
+          {
+            "rank": 1,
+            "elapsed_seconds": 4.862649156000003,
+            "peak_allocated_gib": 0.017255783081054688,
+            "judge": {
+              "judge_calls": 1,
+              "cache_hits": 3,
+              "judge_seconds": 0.012368949999995493,
+              "visual_tokens": 8,
+              "prompt_tokens": 13,
+              "generated_tokens": 3,
+              "decode_failures": 0
+            }
+          }
+        ]
+      },
+      "backend": {
+        "backend": "deepspeed_zero3",
+        "world_size": 2,
+        "stage": 3,
+        "engine": "DeepSpeedEngine",
+        "optimizer": "DeepSpeedCPUAdam",
+        "gradient_accumulation_steps": 2,
+        "partitioned_parameters": 37,
+        "resolved_deepspeed": {
+          "fp16": {
+            "enabled": false,
+            "loss_scale": 0,
+            "loss_scale_window": 1000,
+            "initial_scale_power": 16,
+            "hysteresis": 2,
+            "min_loss_scale": 1
+          },
+          "bf16": {
+            "enabled": true
+          },
+          "optimizer": {
+            "type": "AdamW",
+            "params": {
+              "lr": 0.01,
+              "betas": [
+                0.9,
+                0.999
+              ],
+              "eps": 1e-08,
+              "weight_decay": 0.0
+            }
+          },
+          "zero_optimization": {
+            "stage": 3,
+            "offload_optimizer": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "offload_param": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "overlap_comm": true,
+            "contiguous_gradients": true,
+            "sub_group_size": 1000000000,
+            "reduce_bucket_size": 1024,
+            "stage3_prefetch_bucket_size": 921,
+            "stage3_param_persistence_threshold": 320,
+            "stage3_max_live_parameters": 1000000000,
+            "stage3_max_reuse_distance": 1000000000,
+            "stage3_gather_16bit_weights_on_model_save": true
+          },
+          "gradient_accumulation_steps": 2,
+          "gradient_clipping": 1.0,
+          "train_batch_size": 4,
+          "train_micro_batch_size_per_gpu": 1,
+          "steps_per_print": Infinity,
+          "wall_clock_breakdown": false
+        }
+      }
+    },
+    "e5": {
+      "status": {
+        "status": "trained",
+        "backend": "deepspeed_zero3",
+        "global_step": 2,
+        "frozen_C0_unchanged": true,
+        "rank_parameter_max_error": 0.0,
+        "ranks": [
+          {
+            "rank": 0,
+            "elapsed_seconds": 4.839405484999986,
+            "peak_allocated_gib": 0.01725482940673828,
+            "judge": {
+              "judge_calls": 0,
+              "cache_hits": 0,
+              "judge_seconds": 0.0,
+              "visual_tokens": 0,
+              "prompt_tokens": 0,
+              "generated_tokens": 0,
+              "decode_failures": 0
+            }
+          },
+          {
+            "rank": 1,
+            "elapsed_seconds": 4.835885220000023,
+            "peak_allocated_gib": 0.01725482940673828,
+            "judge": {
+              "judge_calls": 0,
+              "cache_hits": 0,
+              "judge_seconds": 0.0,
+              "visual_tokens": 0,
+              "prompt_tokens": 0,
+              "generated_tokens": 0,
+              "decode_failures": 0
+            }
+          }
+        ]
+      },
+      "backend": {
+        "backend": "deepspeed_zero3",
+        "world_size": 2,
+        "stage": 3,
+        "engine": "DeepSpeedEngine",
+        "optimizer": "DeepSpeedCPUAdam",
+        "gradient_accumulation_steps": 2,
+        "partitioned_parameters": 35,
+        "resolved_deepspeed": {
+          "fp16": {
+            "enabled": false,
+            "loss_scale": 0,
+            "loss_scale_window": 1000,
+            "initial_scale_power": 16,
+            "hysteresis": 2,
+            "min_loss_scale": 1
+          },
+          "bf16": {
+            "enabled": true
+          },
+          "optimizer": {
+            "type": "AdamW",
+            "params": {
+              "lr": 0.01,
+              "betas": [
+                0.9,
+                0.999
+              ],
+              "eps": 1e-08,
+              "weight_decay": 0.0
+            }
+          },
+          "zero_optimization": {
+            "stage": 3,
+            "offload_optimizer": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "offload_param": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "overlap_comm": true,
+            "contiguous_gradients": true,
+            "sub_group_size": 1000000000,
+            "reduce_bucket_size": 1024,
+            "stage3_prefetch_bucket_size": 921,
+            "stage3_param_persistence_threshold": 320,
+            "stage3_max_live_parameters": 1000000000,
+            "stage3_max_reuse_distance": 1000000000,
+            "stage3_gather_16bit_weights_on_model_save": true
+          },
+          "gradient_accumulation_steps": 2,
+          "gradient_clipping": 1.0,
+          "train_batch_size": 4,
+          "train_micro_batch_size_per_gpu": 1,
+          "steps_per_print": Infinity,
+          "wall_clock_breakdown": false
+        }
+      }
+    },
+    "model_only": {
+      "status": {
+        "status": "trained",
+        "backend": "deepspeed_zero3",
+        "global_step": 2,
+        "frozen_C0_unchanged": true,
+        "rank_parameter_max_error": 0.0,
+        "ranks": [
+          {
+            "rank": 0,
+            "elapsed_seconds": 4.799817826999998,
+            "peak_allocated_gib": 0.017255783081054688,
+            "judge": {
+              "judge_calls": 2,
+              "cache_hits": 10,
+              "judge_seconds": 0.024668305999995255,
+              "visual_tokens": 16,
+              "prompt_tokens": 26,
+              "generated_tokens": 6,
+              "decode_failures": 0
+            }
+          },
+          {
+            "rank": 1,
+            "elapsed_seconds": 4.799530628000014,
+            "peak_allocated_gib": 0.017255783081054688,
+            "judge": {
+              "judge_calls": 1,
+              "cache_hits": 3,
+              "judge_seconds": 0.012372625000011794,
+              "visual_tokens": 8,
+              "prompt_tokens": 13,
+              "generated_tokens": 3,
+              "decode_failures": 0
+            }
+          }
+        ]
+      },
+      "backend": {
+        "backend": "deepspeed_zero3",
+        "world_size": 2,
+        "stage": 3,
+        "engine": "DeepSpeedEngine",
+        "optimizer": "DeepSpeedCPUAdam",
+        "gradient_accumulation_steps": 2,
+        "partitioned_parameters": 37,
+        "resolved_deepspeed": {
+          "fp16": {
+            "enabled": false,
+            "loss_scale": 0,
+            "loss_scale_window": 1000,
+            "initial_scale_power": 16,
+            "hysteresis": 2,
+            "min_loss_scale": 1
+          },
+          "bf16": {
+            "enabled": true
+          },
+          "optimizer": {
+            "type": "AdamW",
+            "params": {
+              "lr": 0.01,
+              "betas": [
+                0.9,
+                0.999
+              ],
+              "eps": 1e-08,
+              "weight_decay": 0.0
+            }
+          },
+          "zero_optimization": {
+            "stage": 3,
+            "offload_optimizer": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "offload_param": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "overlap_comm": true,
+            "contiguous_gradients": true,
+            "sub_group_size": 1000000000,
+            "reduce_bucket_size": 1024,
+            "stage3_prefetch_bucket_size": 921,
+            "stage3_param_persistence_threshold": 320,
+            "stage3_max_live_parameters": 1000000000,
+            "stage3_max_reuse_distance": 1000000000,
+            "stage3_gather_16bit_weights_on_model_save": true
+          },
+          "gradient_accumulation_steps": 2,
+          "gradient_clipping": 1.0,
+          "train_batch_size": 4,
+          "train_micro_batch_size_per_gpu": 1,
+          "steps_per_print": Infinity,
+          "wall_clock_breakdown": false
+        }
+      }
+    },
+    "coverage": {
+      "status": {
+        "status": "coverage_complete",
+        "backend": "deepspeed_zero3",
+        "global_step": 0,
+        "frozen_C0_unchanged": true,
+        "rank_parameter_max_error": 0.0,
+        "ranks": [
+          {
+            "rank": 0,
+            "elapsed_seconds": 4.211720686999968,
+            "peak_allocated_gib": 0.009462356567382812,
+            "judge": {
+              "judge_calls": 2,
+              "cache_hits": 1,
+              "judge_seconds": 0.024762369999962175,
+              "visual_tokens": 16,
+              "prompt_tokens": 26,
+              "generated_tokens": 6,
+              "decode_failures": 0
+            }
+          },
+          {
+            "rank": 1,
+            "elapsed_seconds": 4.208648213000032,
+            "peak_allocated_gib": 0.009462356567382812,
+            "judge": {
+              "judge_calls": 1,
+              "cache_hits": 0,
+              "judge_seconds": 0.012252903999979026,
+              "visual_tokens": 8,
+              "prompt_tokens": 13,
+              "generated_tokens": 3,
+              "decode_failures": 0
+            }
+          }
+        ]
+      },
+      "backend": {
+        "backend": "deepspeed_zero3",
+        "world_size": 2,
+        "stage": 3,
+        "engine": "DeepSpeedEngine",
+        "optimizer": "DeepSpeedCPUAdam",
+        "gradient_accumulation_steps": 2,
+        "partitioned_parameters": 37,
+        "resolved_deepspeed": {
+          "fp16": {
+            "enabled": false,
+            "loss_scale": 0,
+            "loss_scale_window": 1000,
+            "initial_scale_power": 16,
+            "hysteresis": 2,
+            "min_loss_scale": 1
+          },
+          "bf16": {
+            "enabled": true
+          },
+          "optimizer": {
+            "type": "AdamW",
+            "params": {
+              "lr": 0.01,
+              "betas": [
+                0.9,
+                0.999
+              ],
+              "eps": 1e-08,
+              "weight_decay": 0.0
+            }
+          },
+          "zero_optimization": {
+            "stage": 3,
+            "offload_optimizer": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "offload_param": {
+              "device": "cpu",
+              "pin_memory": true
+            },
+            "overlap_comm": true,
+            "contiguous_gradients": true,
+            "sub_group_size": 1000000000,
+            "reduce_bucket_size": 1024,
+            "stage3_prefetch_bucket_size": 921,
+            "stage3_param_persistence_threshold": 320,
+            "stage3_max_live_parameters": 1000000000,
+            "stage3_max_reuse_distance": 1000000000,
+            "stage3_gather_16bit_weights_on_model_save": true
+          },
+          "gradient_accumulation_steps": 2,
+          "gradient_clipping": 1.0,
+          "train_batch_size": 4,
+          "train_micro_batch_size_per_gpu": 1,
+          "steps_per_print": Infinity,
+          "wall_clock_breakdown": false
+        }
+      }
+    }
+  },
+  "target_8_a100_7b_memory_verified": false
+}

@@ -1,0 +1,6 @@
+{
+  "training": {
+    "empty_cache_steps": null,
+    "attn_implementation": "sdpa"
+  }
+}

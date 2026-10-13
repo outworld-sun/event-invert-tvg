@@ -1,0 +1,26 @@
+{
+  "paths": {
+    "model_path": "/models/Qwen2.5-VL-7B-Instruct",
+    "video_root": "/datasets/timer1/videos",
+    "train_annotations": "/datasets/timer1/annotations/train_2k5.json",
+    "spacy_model": "en_core_web_sm",
+    "artifact_root": "artifacts/timer1"
+  },
+  "continuation": {
+    "parent_checkpoint": "/checkpoints/E5/checkpoint-3819"
+  },
+  "benchmarks": {
+    "charades": {
+      "annotations": "/datasets/charades/Charades_anno/Charades_sta_test.json",
+      "video_root": "/datasets/charades/Charades_v1",
+      "manifest": "artifacts/timer1/charades.jsonl",
+      "protocol": "charades_sta_test_original_gt_all_queries_physical_video_duration"
+    },
+    "tvgbench": {
+      "annotations": "/datasets/timer1/annotations/tvgbench.json",
+      "video_root": "/datasets/timer1/videos",
+      "manifest": "artifacts/timer1/tvgbench.jsonl",
+      "protocol": "tvgbench_800_original_gt_annotation_local_window"
+    }
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "schema_version": "vtg_standalone_v1",
+  "experiment_id": "E5_tri_joint",
+  "seed": 3407,
+  "paths": {
+    "model_path": "/models/Qwen2.5-VL-7B-Instruct",
+    "video_root": "/datasets/timer1/videos",
+    "train_annotations": "/datasets/timer1/annotations/train_2k5.json",
+    "spacy_model": "en_core_web_sm",
+    "artifact_root": "artifacts/timer1"
+  },
+  "model": {
+    "backbone": "Qwen2.5-VL-7B-Instruct",
+    "precision": "bf16",
+    "gradient_checkpointing": true,
+    "freeze_vision": true,
+    "freeze_visual_projector": true,
+    "lora": {
+      "enabled": true,
+      "scope": "language_model_only",
+      "targets": [
+        "q_proj",
+        "k_proj",
+        "v_proj",
+        "o_proj"
+      ],
+      "rank": 16,
+      "alpha": 32,
+      "dropout": 0.0
+    }
+  },
+  "data": {
+    "dataset": "timer1_train_2k5",
+    "protocol": "timer1_all_valid_train_2k5_external_charades_tvgbench_test",
+    "split_seed": 3407,
+    "dev_video_fraction": 0,
+    "pilot_max_queries": 2048,
+    "dev_mini_max_queries": 256,
+    "parser_version": "core_rules_v1",
+    "alias_version": "aliases_v1",
+    "use_all_training_annotations": true
+  },
+  "video": {
+    "profile": "invert_dynamic_768",
+    "allocation": "dynamic",
+    "fps": 2.0,
+    "min_frames": 4,
+    "max_frames": 768,
+    "min_pixels_per_frame": 12544,
+    "max_pixels_per_frame": 602112,
+    "total_pixels": 2809856,
+    "visual_token_cap": 9216,
+    "scan_cache_size": 32
+  },
+  "training": {
+    "world_size": 8,
+    "unique_prompts_per_update": 4,
+    "num_generations": 8,
+    "completion_micro_batch_per_device": 1,
+    "gradient_accumulation_steps": 4,
+    "max_optimizer_steps": 3819,
+    "learning_rate": 1e-05,
+    "weight_decay": 0.0,
+    "warmup_ratio": 0.03,
+    "scheduler": "constant_with_warmup",
+    "policy_clip_epsilon": 0.2,
+    "kl_beta": 0.04,
+    "advantage_epsilon": 0.0001,
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "max_completion_tokens": 256,
+    "max_prompt_tokens": 16384,
+    "save_steps": 100,
+    "attn_implementation": "sdpa",
+    "num_train_epochs": 5,
+    "save_total_limit": 3,
+    "empty_cache_steps": null,
+    "logging_steps": 1,
+    "save_strategy": "steps",
+    "save_only_model": false,
+    "deepspeed": "../scripts/zero3_offload.json"
+  },
+  "reward": {
+    "joint_lambda": 1.0,
+    "unbound": false,
+    "grounding_functions": [
+      "iou",
+      "format"
+    ]
+  },
+  "evaluation": {
+    "bootstrap_video_samples": 2000
+  },
+  "logging": {
+    "tensorboard": true,
+    "jsonl_rollouts": true,
+    "run_name": null,
+    "logging_dir": null
+  },
+  "benchmarks": {
+    "charades": {
+      "annotations": "/datasets/charades/Charades_anno/Charades_sta_test.json",
+      "video_root": "/datasets/charades/Charades_v1",
+      "manifest": "artifacts/timer1/charades.jsonl",
+      "protocol": "charades_sta_test_original_gt_all_queries_physical_video_duration"
+    },
+    "tvgbench": {
+      "annotations": "/datasets/timer1/annotations/tvgbench.json",
+      "video_root": "/datasets/timer1/videos",
+      "manifest": "artifacts/timer1/tvgbench.jsonl",
+      "protocol": "tvgbench_800_original_gt_annotation_local_window"
+    }
+  },
+  "branch": "E5",
+  "continuation": {
+    "parent_checkpoint": "/checkpoints/E5/checkpoint-3819",
+    "schedule_seed": 3417,
+    "verification_protocol": "full_query_v2",
+    "alpha_swap": 0.1,
+    "beta_dpo": 0.1,
+    "lambda_pair": 0.05,
+    "min_iou": 0.3,
+    "min_gap": 0.1,
+    "weight_gap": 0.3,
+    "semantic_eta": 0.05,
+    "matched_calibration": null
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "base.json",
+  "branch": "N2_Event_pair",
+  "training": {
+    "max_optimizer_steps": 764,
+    "num_train_epochs": 1,
+    "warmup_ratio": 0.030104712041884817
+  }
+}

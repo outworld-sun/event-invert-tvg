@@ -1,0 +1,1 @@
+"""VTG rewards components."""
