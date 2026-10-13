@@ -17,7 +17,7 @@ source .venv/bin/activate
 
 安装脚本默认 PyTorch 2.6.0 + CUDA 12.4、DeepSpeed 0.18.9。CPU offload 使用 DeepSpeedCPUAdam，服务器需要可用的 C++ 编译器和 Ninja；首次启动会编译扩展。默认注意力实现是 `sdpa`，无需编译 FlashAttention。服务器已有可用环境时也可以直接 `pip install -e '.[dev]'`。如需 FlashAttention，安装时设置 `INSTALL_FLASH_ATTENTION=1`，并在本地配置中设置 `training.attn_implementation` 为 `flash_attention_2`。
 
-## 2. 使用 Invert4TVG 风格的八卡脚本
+## 2. 八卡脚本
 
 主入口是 [`scripts/train.sh`](scripts/train.sh)。参考官方的“脚本变量 + torchrun + 显式训练参数”结构，现在直接修改脚本顶部即可，无需先编辑 JSON：
 
@@ -172,33 +172,11 @@ bash scripts/evaluate.sh --config configs/n1_8xa100.json --paths configs/paths.l
 
 单卡评估使用 `NPROC_PER_NODE=1 bash scripts/evaluate.sh ...`，不需要改训练配置。基础模型评估显式使用 `--base` 替代 `--checkpoint`。调试时可加 `--limit 16`，但必须使用独立输出目录，结果会标记为 `partial_benchmark`。
 
-## 8. 验证与上传 GitHub
 
-```bash
-bash scripts/test.sh
-```
+## 数据集和评估集
 
-CPU 测试包含动态预算、768 帧真实处理器、PyAV 视频解码、严格偏好筛选、八进程 CPU DDP 梯度、微型 Qwen 反向传播和 checkpoint 恢复。另有独立的真实 GPU ZeRO-3 测试，使用临时随机微型模型，不下载权重、不读取训练数据：
-
-```bash
-GPU_LIST=0,1 NPROC_PER_NODE=2 bash scripts/test_zero3.sh
-# 目标八卡服务器可验证完整进程布局：
-GPU_LIST=0,1,2,3,4,5,6,7 NPROC_PER_NODE=8 bash scripts/test_zero3.sh
-```
-
-该脚本检查实际 CPUAdam、分片参数、生成、冻结判别、梯度累积、保存、跨进程重启恢复，以及恢复/连续训练的权重逐元素一致性。测试奖励与偏好对为可控 fixture，不作为 IoU 结果。真实训练输出 `backend.json` 可核查实际引擎和配置。验证范围与结果见 [VALIDATION.md](docs/VALIDATION.md)。
-
-目录已可作为独立 Git 仓库使用。不要上传模型、视频、数据标注、输出或本地路径配置。创建自己的 GitHub 空仓库后：
-
-如果当前机器尚未配置 Git 作者信息，先用自己的信息执行 `git config user.name "你的名字"` 和 `git config user.email "你的邮箱"`。
-
-源码压缩包不含 `.git`。如果通过压缩包迁移，解压后先执行 `git init -b main`。
-
-```bash
-git add .
-git commit -m "Refactor VTG training for dynamic 768-frame inputs"
-git remote add origin https://github.com/YOUR_NAME/YOUR_REPO.git
-git push -u origin main
-```
-
-若本地已有初始提交，可跳过前两条命令。分发说明见 [NOTICE.md](NOTICE.md)；选择公开许可证前应确认自己代码及相关资产的授权。
+### TimeLens
+https://huggingface.co/datasets/TencentARC/TimeLens-100K
+https://huggingface.co/datasets/TencentARC/TimeLens-Bench
+### Time-R1
+https://huggingface.co/datasets/Boshenxx/TimeR1-Dataset
