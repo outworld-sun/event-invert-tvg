@@ -176,20 +176,9 @@ bash scripts/evaluate.sh --config configs/n1_8xa100.json --paths configs/paths.l
 
 单卡评估使用 `NPROC_PER_NODE=1 bash scripts/evaluate.sh ...`，不需要改训练配置。基础模型评估显式使用 `--base` 替代 `--checkpoint`。调试时可加 `--limit 16`，但必须使用独立输出目录，结果会标记为 `partial_benchmark`。
 
-<<<<<<< HEAD
-=======
+
 ## 8. 验证
->>>>>>> d87746dd879fe061cd6b52d8ad222ba7bfce9f62
 
-## 数据集和评估集
-
-<<<<<<< HEAD
-### TimeLens
-https://huggingface.co/datasets/TencentARC/TimeLens-100K
-https://huggingface.co/datasets/TencentARC/TimeLens-Bench
-### Time-R1
-https://huggingface.co/datasets/Boshenxx/TimeR1-Dataset
-=======
 CPU 测试包含动态预算、768 帧真实处理器、PyAV 视频解码、严格偏好筛选、八进程 CPU DDP 梯度、微型 Qwen 反向传播和 checkpoint 恢复。另有独立的真实 GPU ZeRO-3 测试，使用临时随机微型模型，不下载权重、不读取训练数据：
 
 ```bash
@@ -200,4 +189,14 @@ GPU_LIST=0,1,2,3,4,5,6,7 NPROC_PER_NODE=8 bash scripts/test_zero3.sh
 
 该脚本检查实际 CPUAdam、分片参数、生成、冻结判别、梯度累积、保存、跨进程重启恢复，以及恢复/连续训练的权重逐元素一致性。测试奖励与偏好对为可控 fixture，不作为 IoU 结果。真实训练输出 `backend.json` 可核查实际引擎和配置。验证范围与结果见 [VALIDATION.md](docs/VALIDATION.md)。
 
->>>>>>> d87746dd879fe061cd6b52d8ad222ba7bfce9f62
+
+## 9. 数据集和评估集
+
+### TimeLens
+https://huggingface.co/datasets/TencentARC/TimeLens-100K
+
+https://huggingface.co/datasets/TencentARC/TimeLens-Bench
+### Time-R1
+
+https://huggingface.co/datasets/Boshenxx/TimeR1-Dataset
+
